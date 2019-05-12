@@ -11,15 +11,19 @@ def create_project_hash
   
   kickstarter.css("li.project.grid_4").each do |project|
     title = project.css("h2.bbcard_name strong a").text
-    projects[title.to_sym] = {
+    projects[title.to_sym] = {                    #forgot what this means projects[title] include?
+      
+      #each project title is a key, and the value is another hash with each of our other data points as keys.
+      
       :image_link => project.css("div.project-thumbnail a img").attribute("src").value,
       :description => project.css("p.bbcard_blurb").text,
       :location => project.css("ul.project-meta span.location-name").text,
-      :percent_funded => project.css("ul.project-stats li.first.funded strong").text.gsub("%","").to_i
+      :percent_funded => project.css("ul.project-stats li.first.funded strong").text.gsub("%","").to_i        #removes the percent funded sign and turns it into an interger - no string
     }
   end
  
   # return the projects hash
+  
   projects
 end
 
